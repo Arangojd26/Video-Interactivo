@@ -1,0 +1,54 @@
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+
+.botones-abajo-derecha{
+    position:absolute;
+    bottom:15px;
+    right:10px;
+}
+
+.html,
+body {
+  /* Para que funcione correctamente en Smarthpones y Tablets */
+  height: 100vh;
+}
+
+body {
+ /* Ruta relativa o completa a la imagen */
+  background-image: url("../img/02.jpg");
+  /* Centramos el fondo horizontal y verticalmente */
+  background-position: center center;
+  /* El fonde no se repite */
+  background-repeat: no-repeat;
+  /* Fijamos la imagen a la ventana para que no supere el alto de la ventana */
+  background-attachment: fixed;
+  /* El fonde se re-escala automáticamente */
+  background-size: cover;
+  /* Color de fondo si la imagen no se encuentra o mientras se está cargando */
+  background-color: #FFF;
+  /* Fuente para el texto */
+  /* text-align: center;
+  color: #000;
+  font-family: "Times New Roman", Times, serif; */
+}
+
+/* Background para ancho máximo de la pantalla física */
+@media only screen and (max-device-width: 767px) {
+body {
+  background-image: url("../img/02.jpg");
+  color: #FFF;
+  }
+}
+/* Background para ancho máximo del navegador */
+@media only screen and (max-width: 767px) {
+body {
+  background-image: url("../img/02.jpg");
+  color: #FFF;
+  }
+ }
