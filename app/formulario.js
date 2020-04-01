@@ -20,6 +20,55 @@ function enviar(){
     })
 }
 
+function limpiar(){
+    var jugadores = "jugadores";
+    var passURL = "app/eliminar.php?jugadores=" + jugadores;
+    $.ajax({ //Envía los datos a eliminar php, sin actualizar la pagina.
+        type: "post",
+        url:passURL,
+        data: jugadores,
+        success: function(texto){
+            if(texto=="exito"){
+                console.log("Eliminó los datos");
+            }else{
+                console.log("Dormite");
+            }
+        }
+    })
+}
+
+$('#cargarRecords').click(function() {
+    var esperar = 1000;
+    $.ajax({
+        url: "registrosLink.php",
+        beforeSend: function() {
+            $('#actualizar').text(' Cargando...');
+        },
+        success: function(data) {
+            setTimeout(function() {
+                $('#actualizar').html(data);
+            }, esperar);
+        }
+    });
+});
+
+$('#limpiarRecords').click(function() {
+    
+    var esperar = 0;
+    $.ajax({
+        url: "registrosLink.php",
+        beforeSend: function() {
+            limpiar();
+            $('#actualizar').text('Cargando...');
+        },
+        success: function(data) {
+            setTimeout(function() {
+                $('#actualizar').html(data);
+            }, esperar);
+        }
+    });
+});
+
 function correcto(){
     $("#mensajeExito").removeClass("d-none");
     $("#mensajeError").addClass("d-none");
