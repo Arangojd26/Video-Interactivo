@@ -13,11 +13,13 @@ function enviar(){
         success: function(texto){
             if(texto=="exito"){
                 correcto();
+                
             }else{
                 phpError(texto);  
             }
         }
     })
+    console.log(datos);
 }
 
 function limpiar(){
@@ -69,9 +71,14 @@ $('#limpiarRecords').click(function() {
     });
 });
 
+
+  
+
 function correcto(){
     $("#mensajeExito").removeClass("d-none");
     $("#mensajeError").addClass("d-none");
+    $("#ingresoNombreE").addClass("d-none");
+    $("#cargaNombreP").removeClass("d-none");
 }
 function phpError(texto){
     $("#mensajeError").removeClass("d-none");

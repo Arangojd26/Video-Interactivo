@@ -6,12 +6,38 @@
     max-height: 100%;
   }
 
-
 .botones-abajo-derecha{
     position:absolute;
     bottom:15px;
     right:10px;
 }
+
+.ingresa-nombre-niño{
+  position:absolute;
+  bottom: 70%;
+  right: 68%;
+}
+
+.nombre-en-pantalla{
+  position:absolute;
+  bottom: 93%;
+  right: 7%;
+}
+
+.botones-opcion-multiple{
+  position:absolute;
+  bottom: 30%;
+  right: 50%;
+
+}
+
+.putanje-en-pantalla{
+  position:absolute;
+  bottom: 93%;
+  right: 48%;
+
+}
+
 
 .html,
 body {

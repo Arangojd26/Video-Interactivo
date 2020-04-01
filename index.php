@@ -26,13 +26,15 @@ $resultado = $gsent->fetchAll();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/estilos.css">
+    <script src="app/formulario.js"></script>
     <script src="app/reproductor.js"></script>
 
     <title>Hello, world!</title>
 
 </head>
 
-<body>
+<body onLoad="initPlayer()">
+
     <!-- div donde están ubicados los botones -->
     <div class="container-fluid">
         <video muted loop id="myVideo">
@@ -47,19 +49,57 @@ $resultado = $gsent->fetchAll();
                 <button type="button" class="btn btn-outline-light mb-2 mb-sm-0" data-toggle="modal" data-target="#contacto" id="cargarRecords" onclick="pausarVideo()">Records</button>
             </div>
         </div>
+        <div class="row">
+            <div class="ingresa-nombre-niño d-none" id="ingresoNombreE">
+                <h1 class="display-4 text-center text-light font-weight-bold">Ingresa tu nombre</h1>
+                <div class="alert alert-success d-none" id="mensajeExito">Estudiante creado con éxito</div>
+                <div class="alert alert-danger d-none" id="mensajeError"></div>
+                <!-- Fila de ingresar valores-->
+                <form id="formulario" novalidate method="POST" action="index.php">
+                    <div class="row form-group justify-content-center">
+                        <div class="col-md-8 mt-3">
+                            <input type="text" name="nombreJugador" value="" id="nombreJugador" class="form-control" required>
+                        </div>
+                    </div>
+                    <!-- Fila botón para guardar el nombre-->
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-info mt-3" style="font-size:24px">Guardar
+                            <i class="fa fa-save"></i></button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="ingresa-nombre-niño text-center d-none" id="cargaNombreP">
+                <h1 class="display-5 text-light font-weight-bold">Guardamos tu nombre :)</h1>
+                <button type="button" class="btn btn-info mt-3" style="font-size:24px" onclick="pausarVideo()">Continuar</button>
+            </div>
+
+            <div class="nombre-en-pantalla">
+                <div class="ingresa-nombre-niño display-5 lead text-center text-light font-weight-bold d-none" id="participanteP">
+
+                </div>
+            </div>
+            <div class="putanje-en-pantalla">
+                <h1 class="display-5 text-light font-weight-bold" id="puntajeP">Score: 0</h1>
+            </div>
+            <div class="botones-opcion-multiple" id="padreBotones">
+                    <button class="btn btn-info py-2 px-3 d-none" id="btnPrueba">Prueba</button>
+            </div>
+
+        </div>
+
     </div>
     <!--Fin del div donde están ubicados los botones -->
 
-
     <!-- Modal  HOME-->
-    <div class="modal fade" id="home" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="home" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header">
 
                     <h1 class="modal-title w-100 display-4 text-center text-light font-weight-bold" id="exampleModalLongTitle">LeSmart</h1>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="pausarVideo()">
                         <span class="fa-layers fa-fw">
                             <i class="fas fa-circle" style="color:Tomato"></i>
                             <i class="fa-inverse fas fa-times" data-fa-transform="shrink-6"></i>
@@ -72,29 +112,13 @@ $resultado = $gsent->fetchAll();
                         <img src="assets/img/niño.png" alt="" class="img-fluid rounded">
                     </div>
 
-                    <div class="alert alert-success d-none" id="mensajeExito">Estudiante creado con éxito</div>
-                    <div class="alert alert-danger d-none" id="mensajeError"></div>
-                    <!-- Fila de ingresar valores-->
-                    <form id="formulario" novalidate method="POST" action="index.php">
-                        <div class="row form-group justify-content-center">
-                            <div class="col-md-8 mt-3">
-                                <input type="text" name="nombreJugador" value="" id="nombreJugador" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- Fila botón para guardar el nombre-->
-                        <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-info mt-3" style="font-size:24px">Guardar
-                                <i class="fa fa-save"></i></button>
-                        </div>
+                    <!-- Fila botón para continuar con el video-->
+                    <div class="row justify-content-center">
+                        <a class="text-light mt-5 pt-4" role="button" id="enviarNombre" name="enviarNombre">
+                            <button class="fas fa-play-circle fa-spin display-1" onclick="pausarVideo()" data-dismiss="modal"></button>
+                        </a>
+                    </div>
 
-                        <!-- Fila botón para continuar con el video-->
-                        <div class="row justify-content-center">
-                            <a class="text-light mt-5 pt-4" role="button" id="enviarNombre" name="enviarNombre">
-                                <button class="fas fa-play-circle fa-spin display-1" onclick="pausarVideo()" data-dismiss="modal"></button>
-                            </a>
-                        </div>
-
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button> -->
@@ -103,13 +127,13 @@ $resultado = $gsent->fetchAll();
         </div>
     </div><!-- Modal  HOME-->
 
-    <!-- Modal  Contacto-->
-    <div class="modal" id="contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal  Records-->
+    <div class="modal" id="contacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header">
                     <h5 class="modal-title w-100 display-4 text-center" id="exampleModalLongTitle">Puntaje</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="pausarVideo()">
                         <span class="fa-layers fa-fw">
                             <i class="fas fa-circle" style="color:Tomato"></i>
                             <i class="fa-inverse fas fa-times" data-fa-transform="shrink-6"></i>
@@ -147,23 +171,17 @@ $resultado = $gsent->fetchAll();
                 </div>
             </div>
         </div>
-        <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="limpiarRecords">Limpiar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="pausarVideo()">Cerrar</button>
-        </div> -->
-    </div><!-- Modal  contacto-->
+    </div><!-- Modal  Records-->
 
-    <script>
-
-    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-    <script src="app/reproductor.js"></script>
     <script src="app/formulario.js"></script>
+    <script src="app/reproductor.js"></script>
+
     <script>
         $(function() {
             $("#home").modal();
