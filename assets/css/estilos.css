@@ -20,7 +20,7 @@
 
 .nombre-en-pantalla{
   position:absolute;
-  bottom: 93%;
+  bottom: 95%;
   right: 7%;
 }
 
@@ -36,6 +36,30 @@
   bottom: 93%;
   right: 48%;
 
+}
+
+.barra-en-pantalla{
+  position:absolute;
+  bottom: 85%;
+  right: 40%;
+
+}
+
+.valor-barra-en-pantalla{
+  position:absolute;
+  bottom: 65%;
+  right: 40%;
+
+}
+
+
+.verticalrotate {
+  transform: rotate(-90deg);
+  transform-origin: right top;
+  -ms-transform: rotate(-90deg);
+  -ms-transform-origin:right top;
+  -webkit-transform: rotate(-90deg);
+  -webkit-transform-origin:right top
 }
 
 

@@ -25,6 +25,12 @@ $resultado = $gsent->fetchAll();
     <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- Importa librerías desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <!-- Importa librerías desde los assets -->
+    <script language="javascript" type="text/javascript" src="assets/lib/p5.serialport.js"></script>
+
     <link rel="stylesheet" href="assets/css/estilos.css">
     <script src="app/formulario.js"></script>
     <script src="app/reproductor.js"></script>
@@ -35,7 +41,7 @@ $resultado = $gsent->fetchAll();
 
 <body onLoad="initPlayer()">
 
-    <!-- div donde están ubicados los botones -->
+    <!-- div donde están ubicados los botones de abajo-->
     <div class="container-fluid">
         <video muted loop id="myVideo">
             <source src="assets/vid/love.mp4" type="video/mp4">
@@ -69,21 +75,37 @@ $resultado = $gsent->fetchAll();
                 </form>
 
             </div>
+            <!-- Fila de continuar con el video después de guardar el nombre -->
             <div class="ingresa-nombre-niño text-center d-none" id="cargaNombreP">
                 <h1 class="display-5 text-light font-weight-bold">Guardamos tu nombre :)</h1>
                 <button type="button" class="btn btn-info mt-3" style="font-size:24px" onclick="pausarVideo()">Continuar</button>
             </div>
-
+            <!-- Fila donde muestra el nombre ingresado reciente -->
             <div class="nombre-en-pantalla">
                 <div class="ingresa-nombre-niño display-5 lead text-center text-light font-weight-bold d-none" id="participanteP">
 
                 </div>
             </div>
+            <!-- Fila donde muestra el puntaje reciente -->
             <div class="putanje-en-pantalla">
                 <h1 class="display-5 text-light font-weight-bold" id="puntajeP">Score: 0</h1>
             </div>
             <div class="botones-opcion-multiple" id="padreBotones">
-                    <button class="btn btn-info py-2 px-3 d-none" id="btnPrueba">Prueba</button>
+                <button class="btn btn-info py-2 px-3 d-none" id="btnPrueba">Prueba</button>
+            </div>
+            <div class="d-none" id="regla-de-medicion">
+                <div class="valor-barra-en-pantalla">
+                    <h1 class="text-light display-4 mr-5 mb-4" id="ultrasonido"></h1>
+                </div>
+                <div class="col-md-2 barra-en-pantalla">
+                    <!-- Fila donde muestra la barra -->
+
+                    <div class="progress md-progress verticalrotate" style="height: 20px">
+                        <div id="dynamic" class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style=" height: 50px" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
